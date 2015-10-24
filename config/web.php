@@ -3,6 +3,9 @@ $config = [
     'id' => 'app',
     'defaultRoute' => 'main/default/index',
     'modules' => [
+        'backend' => [
+            'class' => 'app\modules\backend\Module',
+        ],
         'main' => [
             'class' => 'app\modules\main\Module',
         ],

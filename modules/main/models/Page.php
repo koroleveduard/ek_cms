@@ -32,7 +32,7 @@ class Page extends \yii\db\ActiveRecord
             [['parent'], 'integer'],
             [['slug', 'title'], 'required'],
             [['content'], 'string'],
-            [['slug', 'title'], 'string', 'max' => 250]
+            [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled'], 'string', 'max' => 250]
         ];
     }
 
@@ -43,15 +43,18 @@ class Page extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent' => 'Parent',
-            'slug' => 'Slug',
-            'title' => 'Title',
-            'content' => 'Content',
+            'parent' => 'Родительская страница',
+            'slug' => 'ЧПУ',
+            'title' => 'Заголовок',
+            'meta_title' => 'meta title',
+            'meta_description' => 'meta description',
+            'meta_keywords' => 'meta keywords',
+            'content' => 'Контент',
         ];
     }
 
     public static function getByUrlPath($slug){
-        $page = self::find()->where(['slug' => $slug])->one();
+        $page = self::find()->where(['slug_compiled' => $slug])->one();
         return $page;
     }
 

@@ -14,9 +14,8 @@ use app\modules\backend\models\Page;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?//= $form->field($model, 'parent')->textInput() ?>
-    <?=
-    $form->field($model, 'parent')
+
+    <?= $form->field($model, 'parent')
         ->dropDownList(
             ArrayHelper::merge(
                 [0 => "Выберите родителя"],
@@ -30,6 +29,9 @@ use app\modules\backend\models\Page;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">

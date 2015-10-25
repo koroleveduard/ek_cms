@@ -26,7 +26,7 @@ class m151022_125542_create_page_table extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%page}}');
+        return false;
     }
 
     /*

@@ -20,7 +20,7 @@ class PageRule implements UrlRuleInterface
              unset($params['id']);
          }
          if (null !== $model) {
-             $url = $model->slug;
+             $url = $model->slug_compiled;
              $_query = http_build_query($params);
              $url = (!empty($_query)) ? $url . '?' . $_query : $url;
              return $url;

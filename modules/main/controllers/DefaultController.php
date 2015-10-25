@@ -23,6 +23,7 @@ class DefaultController extends Controller
 
         $pagination = new Pagination([
             'defaultPageSize' => 2,
+            'forcePageParam' => false,
             'totalCount' => $query->count(),
         ]);
 

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\backend\models\Page;
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\backend\models\Page */
@@ -33,7 +34,12 @@ use app\modules\backend\models\Page;
     <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?//= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6,
+        ],
+        'preset' => 'toolbar_Basic'
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

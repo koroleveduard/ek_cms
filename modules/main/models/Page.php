@@ -29,7 +29,7 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent'], 'integer'],
+            [['parent','status'], 'integer'],
             [['slug', 'title'], 'required'],
             [['content'], 'string'],
             [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled'], 'string', 'max' => 250]
@@ -43,6 +43,7 @@ class Page extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'status' => 'Активен',
             'parent' => 'Родительская страница',
             'slug' => 'ЧПУ',
             'title' => 'Заголовок',
@@ -54,12 +55,13 @@ class Page extends \yii\db\ActiveRecord
     }
 
     public static function getByUrlPath($slug){
-        $page = self::find()->where(['slug_compiled' => $slug])->one();
+        $page = self::find()->where(['slug_compiled' => $slug,'status'=>1])->one();
         return $page;
     }
 
     public static function findById($id){
         $id_page = (int)$id;
-        return self::findOne($id_page);
+        $page = self::find()->where(['status'=>1,'id'=>$id_page])->one();
+        return $page;
     }
 }

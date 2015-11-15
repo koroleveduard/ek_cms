@@ -13,7 +13,8 @@ use app\modules\backend\models\Page;
 <div class="page-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    
+    <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
 
     <?= $form->field($model, 'parent')
         ->dropDownList(

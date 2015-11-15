@@ -19,7 +19,7 @@ class DefaultController extends Controller
  
     public function actionIndex()
     {
-        $query = Page::find();
+        $query = Page::find()->where(['status'=>1]);
 
         $pagination = new Pagination([
             'defaultPageSize' => 2,

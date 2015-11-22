@@ -30,9 +30,10 @@ class Page extends \yii\db\ActiveRecord
     {
         return [
             [['parent','status'], 'integer'],
-            [['slug', 'title'], 'required'],
+            [['slug', 'title'], 'required','message' => 'Данное поле обязательно для заполнения'],
             [['content'], 'string'],
-            [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled'], 'string', 'max' => 250]
+            [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled'], 'string', 'max' => 250],
+            [['slug'],'unique','message' => 'ЧПУ должно быть уникальным на всю систему']
         ];
     }
 

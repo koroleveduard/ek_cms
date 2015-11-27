@@ -30,12 +30,12 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'Admin Panel',
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => ['/backend/default/index'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    
+
     echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => array_filter([
@@ -47,6 +47,7 @@ AppAsset::register($this);
     ?>
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => ['label' => 'Админка','url'=>['/backend/default/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>

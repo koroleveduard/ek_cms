@@ -48,6 +48,9 @@ AppAsset::register($this);
                 ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                     'url' => ['/user/default/logout'],
                     'linkOptions' => ['data-method' => 'post']],
+            !Yii::$app->user->isGuest ?
+                ['label' => 'Admin', 'url' => ['/backend/default/index']] :
+                false,
         ]),
     ]);
     NavBar::end();
@@ -55,6 +58,7 @@ AppAsset::register($this);
     ?>
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => ['label'=>'Главная','url'=>['/main/default/index']],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>

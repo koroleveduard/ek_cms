@@ -32,7 +32,7 @@ class Page extends \yii\db\ActiveRecord
             [['parent','status'], 'integer'],
             [['slug', 'title'], 'required','message' => 'Данное поле обязательно для заполнения'],
             [['content'], 'string'],
-            [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled'], 'string', 'max' => 250],
+            [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled','breadcrumb'], 'string', 'max' => 250],
             [['slug'],'unique','message' => 'ЧПУ должно быть уникальным на всю систему']
         ];
     }
@@ -52,6 +52,7 @@ class Page extends \yii\db\ActiveRecord
             'meta_description' => 'meta description',
             'meta_keywords' => 'meta keywords',
             'content' => 'Контент',
+            'breadcrumb' => 'Хлебные крошки'
         ];
     }
 

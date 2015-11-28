@@ -30,6 +30,8 @@ use dosamigos\ckeditor\CKEditor;
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'breadcrumb')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>

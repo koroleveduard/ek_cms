@@ -40,7 +40,7 @@ class PageController extends Controller{
 
 
         $breadcrumbs[] = array(
-            "label" => $model->title,
+            "label" => ($model->breadcrumb) ? $model->breadcrumb : $model->title,
             "url" => '/'.$model->slug_compiled
         );
         $parent = $model->parent;

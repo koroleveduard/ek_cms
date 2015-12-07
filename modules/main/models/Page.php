@@ -3,6 +3,7 @@
 namespace app\modules\main\models;
 
 use Yii;
+use app\modules\backend\models\Templates;
 
 /**
  * This is the model class for table "{{%page}}".
@@ -29,7 +30,7 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent','status'], 'integer'],
+            [['parent','status','template'], 'integer'],
             [['slug', 'title'], 'required','message' => 'Данное поле обязательно для заполнения'],
             [['content'], 'string'],
             [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled','breadcrumb'], 'string', 'max' => 250],
@@ -48,12 +49,18 @@ class Page extends \yii\db\ActiveRecord
             'parent' => 'Родительская страница',
             'slug' => 'ЧПУ',
             'title' => 'Заголовок',
+            'template' => 'Шаблон',
             'meta_title' => 'meta title',
             'meta_description' => 'meta description',
             'meta_keywords' => 'meta keywords',
             'content' => 'Контент',
             'breadcrumb' => 'Хлебные крошки'
         ];
+    }
+
+    public function getTemplates()
+    {
+        return $this->hasOne(Templates::className(), ['id' => 'template']);
     }
 
     public static function getByUrlPath($slug){

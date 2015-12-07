@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\backend\models\Page;
+use app\modules\backend\models\Templates;
 use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
@@ -16,6 +17,16 @@ use dosamigos\ckeditor\CKEditor;
     <?php $form = ActiveForm::begin(); ?>
     
     <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
+
+    <?= $form->field($model, 'template')
+        ->dropDownList(
+            ArrayHelper::merge(
+                ["0" => "default"],
+                ArrayHelper::map(Templates::find()->all(), 'id', 'name')
+            )
+
+        );
+    ?>
 
     <?= $form->field($model, 'parent')
         ->dropDownList(
@@ -44,7 +55,7 @@ use dosamigos\ckeditor\CKEditor;
     ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

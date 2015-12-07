@@ -3,18 +3,55 @@
 namespace app\modules\backend\controllers;
 
 use Yii;
-use app\modules\backend\models\Page;
 use app\modules\backend\models\Templates;
-use app\modules\backend\models\PageSearch;
+use app\modules\backend\models\TemplatesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * PageController implements the CRUD actions for Page model.
  */
-class PageController extends BackendController
+class TemplatesController extends BackendController
 {
+	protected function getTree($path = '', $level = 0)
+    {
+        // if (is_null($this->view->theme) || !file_exists($this->view->theme->getBaseUrl())) {
+        //     return [];
+        // }
+        $result = [];
+        $basePath = Yii::getAlias('@webroot/templates');
+        $dir = new \DirectoryIterator($basePath . $path);
+        /** @var \DirectoryIterator $file */
+        foreach ($dir as $file) {
+            if ($file->isDot()) {
+                continue;
+            }
+            $id = '#' . preg_replace('#[^\w\d]#', '_', $file->getFilename()) . "_lev{$level}";
+            if ($file->isDir()) {
+                $result[] = [
+                    'id' => $id,
+                    'children' => $this->getTree($path . DIRECTORY_SEPARATOR . $file->getBasename(), $level + 1),
+                    'text' => $file->getBasename(),
+                    'type' => 'dir',
+                ];
+            } elseif ($file->isFile() && 'php' === $file->getExtension()) {
+                $result[] = [
+                    'id' => $id,
+                    'text' => $file->getBasename(),
+                    'a_attr' => [
+                        'data-file' => '@webroot/templates'.str_replace($basePath, '', $file->getRealPath()),
+                        'data-toggle' => 'tooltip',
+                        'title' => $file->getBasename()
+                    ],
+                    'type' => 'file',
+                ];
+            }
+        }
+        return $result;
+    }
+
     public function behaviors()
     {
         $behaviors_array = [
@@ -40,24 +77,14 @@ class PageController extends BackendController
      */
     public function actionIndex()
     {
-        $searchModel = new PageSearch();
+
+        $searchModel = new TemplatesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Page model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -68,7 +95,7 @@ class PageController extends BackendController
      */
     public function actionCreate()
     {
-        $model = new Page();
+        $model = new Templates();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -90,7 +117,7 @@ class PageController extends BackendController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -120,10 +147,16 @@ class PageController extends BackendController
      */
     protected function findModel($id)
     {
-        if (($model = Page::findOne($id)) !== null) {
+        if (($model = Templates::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionGetViews()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $this->getTree('', 0);
     }
 }

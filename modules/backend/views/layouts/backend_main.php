@@ -9,9 +9,11 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\components\widgets\Alert;
 use app\assets\AppAsset;
+use app\assets\BackendAsset;
 
 
 AppAsset::register($this);
+BackendAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -40,6 +42,7 @@ AppAsset::register($this);
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => array_filter([
         ['label' => 'Страницы', 'url' => ['/backend/page/index']],
+        ['label' => 'Шаблоны', 'url' => ['/backend/templates/index']],
     ]),
 ]);
     NavBar::end();

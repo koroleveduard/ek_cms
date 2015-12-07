@@ -1,10 +1,16 @@
 <?php
 namespace app\modules\main\controllers;
 
+use Yii;
 use yii\web\Controller;
 use app\modules\main\models\Page;
 
 class PageController extends Controller{
+
+    public function getViewPath()
+    {
+        return Yii::getAlias('@webroot/templates/page');
+    }
 
     public function actionShow($id = null)
     {
@@ -30,6 +36,15 @@ class PageController extends Controller{
 
         $breadCrumbs = $this->BuildBreadCrumbs($page);
 
+        if(file_exists(Yii::getAlias($page->templates->path)))
+        {
+            $content = $this->renderFile(Yii::getAlias($page->templates->path),[
+            'page'=>$page,
+            'breadcrubms' => $breadCrumbs]);
+            return $this->renderContent($content);
+        }
+
+        
         return $this->render('show',[
             'page'=>$page,
             'breadcrubms' => $breadCrumbs]);
@@ -55,7 +70,6 @@ class PageController extends Controller{
         }
         $breadcrumbs = array_reverse($breadcrumbs);
         unset($breadcrumbs[count($breadcrumbs) - 1]['url']);
-        print_r($breadcrumbs);
 
         return $breadcrumbs;
     }

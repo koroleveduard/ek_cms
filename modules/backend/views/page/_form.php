@@ -15,20 +15,49 @@ use dosamigos\ckeditor\CKEditor;
 <div class="page-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
-    <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
 
-    <?= $form->field($model, 'template')
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#content">Контент</a></li>
+        <li class=""><a href="#seo">Сео</a></li>
+        <li class=""><a href="#settings">Настройки</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="content">
+
+        <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    
+        <?= $form->field($model, 'breadcrumb')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'content')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6,
+        ],
+        'preset' => 'toolbar_Basic'
+    ]) ?>
+      </div>
+      <div class="tab-pane" id="seo">
+          
+        <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
+
+      </div>
+      <div class="tab-pane" id="settings">
+            <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+            
+          <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
+
+          <?= $form->field($model, 'template')
         ->dropDownList(
             ArrayHelper::merge(
                 ["0" => "default"],
                 ArrayHelper::map(Templates::find()->all(), 'id', 'name')
             )
 
-        );
-    ?>
-
-    <?= $form->field($model, 'parent')
+            );
+        ?>
+        
+        <?= $form->field($model, 'parent')
         ->dropDownList(
             ArrayHelper::merge(
                 [0 => "Выберите родителя"],
@@ -37,22 +66,8 @@ use dosamigos\ckeditor\CKEditor;
 
         );
     ?>
-
-    <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-    
-    <?= $form->field($model, 'breadcrumb')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
-    <?//= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
-    <?= $form->field($model, 'content')->widget(CKEditor::className(), [
-        'options' => ['rows' => 6,
-        ],
-        'preset' => 'toolbar_Basic'
-    ]) ?>
+      </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -61,3 +76,13 @@ use dosamigos\ckeditor\CKEditor;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php $js = <<<JS
+    $('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+JS;
+
+$this->registerJs($js);

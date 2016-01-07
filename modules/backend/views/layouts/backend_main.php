@@ -43,6 +43,7 @@ BackendAsset::register($this);
     'items' => array_filter([
         ['label' => 'Страницы', 'url' => ['/backend/page/index']],
         ['label' => 'Шаблоны', 'url' => ['/backend/templates/index']],
+        ['label' => 'Настройки', 'url' => ['/backend/settings/index']],
     ]),
 ]);
     NavBar::end();

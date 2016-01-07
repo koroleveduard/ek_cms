@@ -2,6 +2,9 @@
 $config = [
     'id' => 'app',
     'defaultRoute' => 'main/default/index',
+    'bootstrap' => [
+        'settings',
+    ],
     'modules' => [
         'backend' => [
             'class' => 'app\modules\backend\Module',
@@ -11,6 +14,9 @@ $config = [
         ],
         'user' => [
             'class' => 'app\modules\user\Module',
+        ],
+        'settings' => [
+            'class' => 'app\modules\settings\Module',
         ],
     ],
     'components' => [

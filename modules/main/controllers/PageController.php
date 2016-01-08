@@ -7,6 +7,17 @@ use app\modules\main\models\Page;
 
 class PageController extends Controller{
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['show'],
+                'duration' => 60*60*24*30,
+            ],
+        ];
+    }
+
     public function getViewPath()
     {
         return Yii::getAlias('@webroot/templates/page');

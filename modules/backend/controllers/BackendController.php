@@ -23,4 +23,13 @@ class BackendController extends  Controller{
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'flush-cache' => [
+                'class' => 'app\modules\backend\actions\FlushCacheAction',
+            ],
+        ];
+    }
+
 }

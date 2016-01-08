@@ -36,7 +36,5 @@ class DefaultController extends Controller
             'pages' => $pages,
             'pagination' => $pagination,
         ]);
-//        $pages = Page::find()->all();
-        //return $this->render('index',['pages' => $pages]);
     }
 }

@@ -38,6 +38,7 @@ class PageController extends BackendController
      * Lists all Page models.
      * @return mixed
      */
+
     public function actionIndex()
     {
         $searchModel = new PageSearch();

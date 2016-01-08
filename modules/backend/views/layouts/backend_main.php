@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -29,6 +30,7 @@ BackendAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+
     <?php
     NavBar::begin([
         'brandLabel' => 'Admin Panel',
@@ -37,7 +39,7 @@ BackendAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-
+    echo Html::a('Очистить кеш',Url::to(['/backend/backend/flush-cache']),['class'=>'clear-cache']);
     echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => array_filter([
@@ -45,10 +47,11 @@ BackendAsset::register($this);
         ['label' => 'Шаблоны', 'url' => ['/backend/templates/index']],
         ['label' => 'Настройки', 'url' => ['/backend/settings/index']],
     ]),
-]);
+    ]);
+
     NavBar::end();
     ?>
-    ?>
+
     <div class="container">
         <?= Breadcrumbs::widget([
             'homeLink' => ['label' => 'Админка','url'=>['/backend/default/index']],

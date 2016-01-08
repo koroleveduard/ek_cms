@@ -13,6 +13,9 @@ class PageController extends Controller{
             [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['show'],
+                'variations' => [
+                    \Yii::$app->request->queryParams,
+                ],
                 'duration' => 60*60*24*30,
             ],
         ];

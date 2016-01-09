@@ -27,7 +27,6 @@ class FlushCacheAction extends Action{
 	public function run()
     {
     	$this->flushCache();
-        return $this->controller->render($this->view);
-        //return $this->controller->renderPartial($this->view);
+        return $this->controller->renderPartial($this->view);
     }
 }

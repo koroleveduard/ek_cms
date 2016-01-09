@@ -16,6 +16,20 @@ class DefaultController extends Controller
             ],
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['index'],
+                'variations' => [
+                    \Yii::$app->request->queryParams,
+                ],
+                'duration' => 60*60*24*30,
+            ],
+        ];
+    }
  
     public function actionIndex()
     {

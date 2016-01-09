@@ -2,7 +2,11 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
-<?php $this->title = 'Настройки'; ?>
+
+<?php 
+$this->params['breadcrumbs'][] = 'Настройки';
+$this->title = 'Настройки'; 
+?>
 <h1>Настройки</h1>
 <?php $form = ActiveForm::begin(); ?>
 <?=Html::label('Хост:','hostName');?>

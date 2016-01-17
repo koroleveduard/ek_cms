@@ -38,11 +38,20 @@ class SettingsController extends BackendController
         $settings = Settings::find()->all();
         if(Yii::$app->request->post())
         {
+            if(!array_key_exists('enable_cache', Yii::$app->request->post()['Settings']))
+            {
+                $curSettings = Settings::findOne(['name'=>'enable_cache']);
+                $curSettings->value = "0";
+                $curSettings->save();
+                unset($curSettings);
+            }
+
             foreach(Yii::$app->request->post()['Settings'] as $settingName => $settingValue)
             {
                 $curSettings = Settings::findOne(['name'=>$settingName]);
                 $curSettings->value = $settingValue;
                 $curSettings->save();
+                unset($curSettings);
             }
             return $this->redirect(['index']);
         }

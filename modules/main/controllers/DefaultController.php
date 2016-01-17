@@ -23,6 +23,7 @@ class DefaultController extends Controller
             [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['index'],
+                'enabled' => \Yii::$app->getModule('settings')->enabled,
                 'variations' => [
                     \Yii::$app->request->queryParams,
                 ],

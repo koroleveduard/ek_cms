@@ -19,3 +19,7 @@
 	margin:0;
 	padding: 0;
 }
+.b-settings-form{}
+.b-settings-form__row{
+    margin-bottom:10px;
+}

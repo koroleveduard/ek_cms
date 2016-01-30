@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\backend\models\Page;
 use app\modules\backend\models\Templates;
 use dosamigos\ckeditor\CKEditor;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\backend\models\Page */
@@ -29,7 +30,31 @@ use dosamigos\ckeditor\CKEditor;
     
         <?= $form->field($model, 'breadcrumb')->textInput(['maxlength' => true]) ?>
 
+        <?/*= DatePicker::widget([
+        'name' => 'created',
+        'type' => DatePicker::TYPE_COMPONENT_APPEND,
+        'value' => $model->created,
+        'pluginOptions' => [
+            'autoclose'=>true,
+            'format' => 'dd-mm-yyyy 00:00:00'
+        ]
+        ]);*/?>
+
+        <?= $form->field($model, 'created')->widget(DatePicker::classname(),[
+          'pluginOptions' => [
+            'language' => 'ru',
+            'format' => 'dd-mm-yyyy',
+          ]
+          
+        ]);?>
+
         <?= $form->field($model, 'content')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6,
+        ],
+        'preset' => 'toolbar_Basic'
+    ]) ?>
+
+    <?= $form->field($model, 'announce')->widget(CKEditor::className(), [
         'options' => ['rows' => 6,
         ],
         'preset' => 'toolbar_Basic'

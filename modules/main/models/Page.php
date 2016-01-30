@@ -32,9 +32,10 @@ class Page extends \yii\db\ActiveRecord
         return [
             [['parent','status','template'], 'integer'],
             [['slug', 'title'], 'required','message' => 'Данное поле обязательно для заполнения'],
-            [['content'], 'string'],
+            [['content','announce'], 'string'],
             [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled','breadcrumb'], 'string', 'max' => 250],
-            [['slug'],'unique','message' => 'ЧПУ должно быть уникальным на всю систему']
+            [['slug'],'unique','message' => 'ЧПУ должно быть уникальным на всю систему'],
+            ['created', 'default'],
         ];
     }
 
@@ -54,8 +55,17 @@ class Page extends \yii\db\ActiveRecord
             'meta_description' => 'meta description',
             'meta_keywords' => 'meta keywords',
             'content' => 'Контент',
+            'announce' => 'Анонс',
+            'created' => 'Дата создания',
             'breadcrumb' => 'Хлебные крошки'
         ];
+    }
+
+    public function beforeValidate()
+    {
+        if($this->created)
+            $this->created = \DateTime::createFromFormat('d-m-Y',$this->created)->format('U');
+        return parent::beforeValidate();
     }
 
     public function getTemplates()

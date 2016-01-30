@@ -89,6 +89,10 @@ class PageController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if($model->created)
+            $model->created = date('d-m-Y',$model->created);
+        else
+            $model->created = date('d-m-Y');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['update', 'id' => $model->id]);

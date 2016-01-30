@@ -11,7 +11,7 @@ $this->title = 'EK-CMS';
         <?php foreach($pages as $page):?>
             <div class="post">
             <h3 class="title"><a href="<?=Url::to(['/main/page/show','id'=>$page->id]);?>"><?=$page->title;?></a></h3>
-            <?=$page->content;?>
+            <?=$page->announce ? $page->announce :$page->content;?>
             </div>
         <?php endforeach;?>
     <?php endif;?>

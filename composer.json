@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "vakata/jstree": "*",
         "2amigos/yii2-ckeditor-widget" : "~1.0",
-        "kartik-v/yii2-widget-datepicker": "*"
+        "kartik-v/yii2-widget-datepicker": "*",
+        "voskobovich/yii2-many-many-behavior": "~3.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -45,6 +45,8 @@ ProtectedAsset::register($this);
     echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => array_filter([
+        ['label' => 'Категории', 'url' => ['/backend/category/index']],
+        ['label' => 'Продукты', 'url' => ['/backend/product/index']],
         ['label' => 'Страницы', 'url' => ['/backend/page/index']],
         ['label' => 'Шаблоны', 'url' => ['/backend/templates/index']],
         ['label' => 'Настройки', 'url' => ['/backend/settings/index']],

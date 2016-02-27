@@ -50,6 +50,7 @@ class DefaultController extends Controller
         return $this->render('index', [
             'pages' => $pages,
             'pagination' => $pagination,
+            'categories' => $categories
         ]);
     }
 }

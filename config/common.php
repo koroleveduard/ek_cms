@@ -24,6 +24,9 @@ return [
                 [
                     'class' => 'app\components\PageRule',
                 ],
+                [
+                    'class' => 'app\components\ShopRule',
+                ],
                 'backend/flush-cache' => 'backend/backend/flush-cache',
                 '<_a:error>' => 'main/default/<_a>',
                 '<_a:(login|logout|signup|email-confirm|request-password-reset|password-reset)>' => 'user/default/<_a>',

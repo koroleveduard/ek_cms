@@ -3,7 +3,7 @@
 namespace app\modules\backend\models;
 
 use Yii;
-use app\modules\main\models\Page;
+use app\modules\backend\models\Product;
 
 /**
  * This is the model class for table "{{%page}}".
@@ -73,6 +73,23 @@ class Category extends \yii\db\ActiveRecord
         } else {
             return false;
         }
+    }
+
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['id_product' => 'id_product'])
+             ->viaTable('{{%cat_2_product}}', ['id_category' => 'id_category']);
+    }
+
+    public static function findById($id){
+        $id_category = (int)$id;
+        $category = self::find()->where(['status'=>1,'id_category'=>$id_category])->one();
+        return $category;
+    }
+
+    public static function getByUrlPath($slug){
+        $category = self::find()->where(['slug_compiled' => $slug,'status'=>1])->one();
+        return $category;
     }
     
 }

@@ -91,4 +91,9 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Category::className(), ['id_category' => 'main_category']);
     }
 
+     public static function getByUrlPath($slug){
+        $product = self::find()->where(['slug' => $slug,'status'=>1])->one();
+        return $product;
+    }
+
 }

@@ -72,7 +72,12 @@ class PageController extends BackendController
         $model = new Page();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+             if(isset(Yii::$app->request->post()['save']))
+                return $this->redirect(['update', 'id' => $model->id]);
+            if(isset(Yii::$app->request->post()['save-and-back']))
+                return $this->redirect(['index']);
+            if(isset(Yii::$app->request->post()['save-and-add']))
+                return $this->redirect(['create']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -95,7 +100,12 @@ class PageController extends BackendController
             $model->created = date('d-m-Y');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            if(isset(Yii::$app->request->post()['save']))
+                return $this->redirect(['update', 'id' => $model->id]);
+            if(isset(Yii::$app->request->post()['save-and-back']))
+                return $this->redirect(['index']);
+            if(isset(Yii::$app->request->post()['save-and-add']))
+                return $this->redirect(['create']);
         } else {
             return $this->render('update', [
                 'model' => $model,

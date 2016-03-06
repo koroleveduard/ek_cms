@@ -36,16 +36,22 @@ class SettingsController extends BackendController
     public function actionIndex()
     {
         $settings = Settings::find()->all();
+        
         if(Yii::$app->request->post())
         {
-            if(!array_key_exists('enable_cache', Yii::$app->request->post()['Settings']))
+            //сбрасываем все чекбоксы, которые не пришли с формы в 0
+            foreach($settings as $option)
             {
-                $curSettings = Settings::findOne(['name'=>'enable_cache']);
-                $curSettings->value = "0";
-                $curSettings->save();
-                unset($curSettings);
+                if(!array_key_exists($option->name, Yii::$app->request->post()['Settings']))
+                {
+                    $curSettings = Settings::findOne(['name'=>$option->name]);
+                    $curSettings->value = "0";
+                    $curSettings->save();
+                    unset($curSettings);
+                }
             }
 
+            //устанавливаем остальные настройки
             foreach(Yii::$app->request->post()['Settings'] as $settingName => $settingValue)
             {
                 $curSettings = Settings::findOne(['name'=>$settingName]);

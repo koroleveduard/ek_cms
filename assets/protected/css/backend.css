@@ -29,3 +29,7 @@
 .b-backend-product__main_category{
     width:300px;
 }
+#product-category_ids{
+    height: 250px;
+    overflow: scroll;
+}

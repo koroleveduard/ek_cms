@@ -4,6 +4,7 @@ namespace app\components;
 
 use app\modules\backend\models\Category;
 use app\modules\backend\models\Product;
+use app\modules\backend\models\Settings;
 use Yii;
 use yii\web\UrlRuleInterface;
 
@@ -27,6 +28,21 @@ class ShopRule implements UrlRuleInterface
              return $url;
          }
      }
+
+     if($route == 'main/product/show') {
+         if (isset($params['id'])) {
+             $model = Product::findById($params['id']);
+             unset($params['id']);
+         }
+        $include_cat_slug = Settings::find()->where(['name' => 'category_in_product_slug'])->one()->value;
+         if (null !== $model) {
+             $url = ($include_cat_slug) ? $model->main->slug_compiled.'/'.$model->slug  : $model->slug;
+             $_query = http_build_query($params);
+             $url = (!empty($_query)) ? $url . '?' . $_query : $url;
+             return $url;
+         }
+     }
+
      return false;
     }
 

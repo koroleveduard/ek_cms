@@ -4,6 +4,7 @@ namespace app\modules\backend\models;
 
 use Yii;
 use app\modules\backend\models\Category;
+use app\modules\backend\models\Settings;
 
 /**
  * This is the model class for table "{{%page}}".
@@ -92,7 +93,26 @@ class Product extends \yii\db\ActiveRecord
     }
 
      public static function getByUrlPath($slug){
+        $include_cat_slug = Settings::find()->where(['name' => 'category_in_product_slug'])->one()->value;
+        if($include_cat_slug) //если в роутинг включены категории
+        {
+            $slug_part = explode('/', $slug);
+            $product_slug = $slug_part[count($slug_part)-1];
+            unset($slug_part[count($slug_part)-1]);
+            $category_slug = implode('/', $slug_part);
+            $product = self::find()->where(['slug' => $product_slug,'status'=>1])->one();
+            if($product->main->slug_compiled == $category_slug)
+                return $product;
+            else
+                return null;
+        }
         $product = self::find()->where(['slug' => $slug,'status'=>1])->one();
+        return $product;
+    }
+
+    public static function findById($id){
+        $id_product = (int)$id;
+        $product = self::find()->where(['status'=>1,'id_product'=>$id_product])->one();
         return $product;
     }
 

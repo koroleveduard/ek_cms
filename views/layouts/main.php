@@ -4,12 +4,13 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\components\widgets\Alert;
 use app\assets\AppAsset;
-
+use app\modules\backend\models\Category;
 
 AppAsset::register($this);
 ?>
@@ -55,14 +56,32 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-    ?>
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'homeLink' => ['label'=>'Главная','url'=>['/main/default/index']],
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <div class="b-page">
+        <div class="b-sidebar">
+            <ul class="b-list-categories">
+            <?php $categories = Category::find()->where(['status'=>1])->all();?>
+            <?php foreach($categories as $category):?>
+                <li class="b-list-categories__tem">
+                    <a href="<?=Url::toRoute(['/main/category/show','id'=>$category->id_category]);?>" class="b-list-categories__link"><?=$category->name;?></a>
+                </li>
+            <?php endforeach;?>
+            </ul>
+        </div>
+        <div class="b-page-content">
+            <div class="b-page-content__breadcrumbs">
+                <?php
+                    //print_r($this->params);
+                ?>
+                <?= Breadcrumbs::widget([
+                    'homeLink' => ['label'=>'Главная','url'=>['/main/default/index']],
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= Alert::widget() ?>
+            </div>
+            <div class="b-page-content__text">
+                <?= $content ?>
+            </div>
+        </div>
     </div>
 </div>
 

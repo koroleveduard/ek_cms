@@ -23,3 +23,13 @@
 .b-settings-form__row{
     margin-bottom:10px;
 }
+.field-product-category_ids label{
+    display: block;
+}
+.b-backend-product__main_category{
+    width:300px;
+}
+#product-category_ids{
+    height: 250px;
+    overflow: scroll;
+}

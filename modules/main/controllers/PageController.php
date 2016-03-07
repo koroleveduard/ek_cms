@@ -77,7 +77,7 @@ class PageController extends Controller{
         {
             $parent_model = Page::findOne($parent);
             $breadcrumbs[] = array(
-                "label" => $parent_model->title,
+                "label" => ($parent_model->breadcrumb) ? $parent_model->breadcrumb : $parent_model->title,
                 "url" => '/'.$parent_model->slug_compiled
             );
             $parent = $parent_model->parent;

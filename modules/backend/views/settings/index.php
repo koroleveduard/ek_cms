@@ -17,6 +17,9 @@ $this->title = 'Настройки';
 <div class="b-settings-form__row">
 <?=Html::checkbox('Settings['.$settings[1]->name.']',$settings[1]->value);?> <label for="">Включить кеш</label>
 </div>
+<div class="b-settings-form__row">
+<?=Html::checkbox('Settings['.$settings[2]->name.']',$settings[2]->value);?> <label for="">Использовать адрес категории в чпу продуктов</label>
+</div>
 <div class="help-block"></div>
 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 <?php ActiveForm::end(); ?>

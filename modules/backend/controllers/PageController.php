@@ -72,7 +72,7 @@ class PageController extends BackendController
         $model = new Page();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-             if(isset(Yii::$app->request->post()['save']))
+            if(isset(Yii::$app->request->post()['save']))
                 return $this->redirect(['update', 'id' => $model->id]);
             if(isset(Yii::$app->request->post()['save-and-back']))
                 return $this->redirect(['index']);

@@ -71,7 +71,12 @@ class ProductController extends BackendController
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            if(isset(Yii::$app->request->post()['save']))
+                return $this->redirect(['update', 'id' => $model->id_product]);
+            if(isset(Yii::$app->request->post()['save-and-back']))
+                return $this->redirect(['index']);
+            if(isset(Yii::$app->request->post()['save-and-add']))
+                return $this->redirect(['create']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -89,8 +94,12 @@ class ProductController extends BackendController
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-            return $this->redirect(['update', 'id' => $model->id_product]);
+            if(isset(Yii::$app->request->post()['save']))
+                return $this->redirect(['update', 'id' => $model->id_product]);
+            if(isset(Yii::$app->request->post()['save-and-back']))
+                return $this->redirect(['index']);
+            if(isset(Yii::$app->request->post()['save-and-add']))
+                return $this->redirect(['create']);
         } else {
             return $this->render('update', [
                 'model' => $model,

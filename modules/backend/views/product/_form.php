@@ -68,7 +68,17 @@ use kartik\date\DatePicker;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Сохранить', [
+          'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+          'name' => 'save']) ?>
+
+        <?= Html::submitButton($model->isNewRecord ? 'Сохранить и вернуться' : 'Сохранить и вернуться', ['
+          class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+          'name' => 'save-and-back']) ?>
+
+        <?= Html::submitButton($model->isNewRecord ? 'Сохранить и создать новую' : 'Сохранить и создать новую', ['
+          class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+          'name' => 'save-and-add']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -101,7 +101,7 @@ class Product extends \yii\db\ActiveRecord
             unset($slug_part[count($slug_part)-1]);
             $category_slug = implode('/', $slug_part);
             $product = self::find()->where(['slug' => $product_slug,'status'=>1])->one();
-            if($product->main->slug_compiled == $category_slug)
+            if($product != NULL && $product->main->slug_compiled == $category_slug)
                 return $product;
             else
                 return null;

@@ -55,9 +55,14 @@ use kartik\date\DatePicker;
             );
         ?>
 
+        <?php
+          $main_category_list = array();
+          if(!$model->isNewRecord)
+            $main_category_list[$model->main->id_category] = $model->main->name;
+        ?>
         <?= $form->field($model, 'main_category')
         ->dropDownList(
-                [$model->main->id_category => $model->main->name]
+                [$main_category_list]
             );
         ?>
 

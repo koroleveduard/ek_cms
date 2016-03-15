@@ -50,7 +50,7 @@ class PageController extends Controller{
 
         $breadCrumbs = $this->BuildBreadCrumbs($page);
 
-        if(file_exists(Yii::getAlias($page->templates->path)))
+        if($page->templates && file_exists(Yii::getAlias($page->templates->path)))
         {
             $content = $this->renderFile(Yii::getAlias($page->templates->path),[
             'page'=>$page,

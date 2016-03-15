@@ -30,16 +30,6 @@ use kartik\date\DatePicker;
     
         <?= $form->field($model, 'breadcrumb')->textInput(['maxlength' => true]) ?>
 
-        <?/*= DatePicker::widget([
-        'name' => 'created',
-        'type' => DatePicker::TYPE_COMPONENT_APPEND,
-        'value' => $model->created,
-        'pluginOptions' => [
-            'autoclose'=>true,
-            'format' => 'dd-mm-yyyy 00:00:00'
-        ]
-        ]);*/?>
-
         <?= $form->field($model, 'created')->widget(DatePicker::classname(),[
           'pluginOptions' => [
             'language' => 'ru',

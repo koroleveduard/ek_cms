@@ -15,7 +15,7 @@ class Module extends \yii\base\Module
     	$hostName = $settings[0]['value'];
         $this->enabled = (bool)$settings[1]['value'];
     	$uri = Yii::$app->request->url;
-    	if(Yii::$app->request->hostInfo != $hostName)
+    	if($hostName != NULL && Yii::$app->request->hostInfo != $hostName)
     	{
     		header("Location: ".$hostName.$uri,true,301);
     		exit;

@@ -62,7 +62,7 @@ class ShopRule implements UrlRuleInterface
         if (null !== $model = Product::getByUrlPath($slug)) {
             return [
                 '/main/product/show/',
-                ['id' => $model['id_product']]
+                ['id' => $model['id']]
             ];
         }
         return false;

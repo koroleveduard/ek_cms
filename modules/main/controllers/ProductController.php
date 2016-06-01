@@ -16,7 +16,7 @@ class ProductController extends Controller{
 
     public function actionShow($id = null)
     {
-    	
+        
         $id_product = (int)$id;
         $product = Product::findOne($id_product);
 

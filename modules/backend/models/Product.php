@@ -47,6 +47,9 @@ class Product extends \yii\db\ActiveRecord
                     'category_ids' => 'categories',
                 ],
             ],
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
         ];
     }
 
@@ -66,7 +69,7 @@ class Product extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_product'    =>  'ID',
+            'id'    =>  'ID',
             'name'  =>  'Имя',
             'slug'  =>  'Слаг',
             'anounce'   =>  'Анонс',
@@ -78,13 +81,14 @@ class Product extends \yii\db\ActiveRecord
             'status'    =>  'статус',
             'category_ids' => 'Категория',
             'main_category' => 'Главная категория',
+            'image' => 'Изображение'
         ];
     }
 
     public function getCategories()
     {
         return $this->hasMany(Category::className(), ['id_category' => 'id_category'])
-             ->viaTable('{{%cat_2_product}}', ['id_product' => 'id_product']);
+             ->viaTable('{{%cat_2_product}}', ['id_product' => 'id']);
     }
 
     public function getMain()
@@ -112,7 +116,7 @@ class Product extends \yii\db\ActiveRecord
 
     public static function findById($id){
         $id_product = (int)$id;
-        $product = self::find()->where(['status'=>1,'id_product'=>$id_product])->one();
+        $product = self::find()->where(['status'=>1,'id'=>$id_product])->one();
         return $product;
     }
 

@@ -8,6 +8,7 @@ use app\modules\backend\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * PageController implements the CRUD actions for Page model.
@@ -71,8 +72,17 @@ class ProductController extends BackendController
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $image = UploadedFile::getInstance($model,'image');
+            if($image){
+                $model->removeImages();
+                $path = Yii::getAlias('@webroot/upload/files/').$image->baseName.'.'.$image->extension;
+                $image->saveAs($path);
+                $model->attachImage($path);
+            }
+            
             if(isset(Yii::$app->request->post()['save']))
-                return $this->redirect(['update', 'id' => $model->id_product]);
+                return $this->redirect(['update', 'id' => $model->id]);
             if(isset(Yii::$app->request->post()['save-and-back']))
                 return $this->redirect(['index']);
             if(isset(Yii::$app->request->post()['save-and-add']))
@@ -94,8 +104,17 @@ class ProductController extends BackendController
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $image = UploadedFile::getInstance($model,'image');
+            if($image){
+                $model->removeImages();
+                $path = Yii::getAlias('@webroot/upload/files/').$image->baseName.'.'.$image->extension;
+                $image->saveAs($path);
+                $model->attachImage($path);
+            }
+
             if(isset(Yii::$app->request->post()['save']))
-                return $this->redirect(['update', 'id' => $model->id_product]);
+                return $this->redirect(['update', 'id' => $model->id]);
             if(isset(Yii::$app->request->post()['save-and-back']))
                 return $this->redirect(['index']);
             if(isset(Yii::$app->request->post()['save-and-add']))

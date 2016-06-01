@@ -23,7 +23,7 @@ class m160130_170329_create_cat_2_product_table extends Migration
         $this->createIndex('idx-cat_2_product-product_id', '{{%cat_2_product}}', 'id_product');
 
         $this->addForeignKey('fk-cat_2_product-cat-id', '{{%cat_2_product}}', 'id_category', '{{%category}}', 'id_category', 'CASCADE');
-        $this->addForeignKey('fk-cat_2_product-product_id', '{{%cat_2_product}}', 'id_product', '{{%product}}', 'id_product', 'CASCADE');
+        $this->addForeignKey('fk-cat_2_product-product_id', '{{%cat_2_product}}', 'id_product', '{{%product}}', 'id', 'CASCADE');
     }
 
     public function down()

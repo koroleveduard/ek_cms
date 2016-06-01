@@ -13,7 +13,7 @@ class m160130_170255_create_product_table extends Migration
         }
 
         $this->createTable('{{%product}}', [
-            'id_product' => $this->primaryKey(),
+            'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
             'slug' => $this->string(250)->notNull(),
             'main_category' => $this->integer(10)->notNull(),

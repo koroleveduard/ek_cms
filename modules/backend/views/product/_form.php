@@ -14,7 +14,11 @@ use kartik\date\DatePicker;
 
 <div class="page-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+      'options' => [
+        'enctype' => 'multipart/form-data'
+      ],
+    ]); ?>
 
     <ul class="nav nav-tabs" id="myTab">
         <li class="active"><a href="#content">Контент</a></li>
@@ -38,6 +42,13 @@ use kartik\date\DatePicker;
         ],
         'preset' => 'toolbar_Basic'
     ]) ?>
+
+         <?= $form->field($model, 'image')->fileInput(); ?>
+
+         <div class="form-group">
+           <?php $image = $model->getImage(); ?>
+           <img src="<?=$image->getUrl('300x');?>" alt="">
+         </div>
     
       </div>
       <div class="tab-pane" id="seo">

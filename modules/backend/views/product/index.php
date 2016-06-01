@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'id_product',
+            'id',
             [
                 'attribute' => 'name',
                 'label' => 'Название',
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model){
                     return Html::a(
                         $model->name,
-                        ['/backend/product/update','id'=>$model->id_product]
+                        ['/backend/product/update','id'=>$model->id]
                     );
                 }
 
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view} {delete}',
                 'buttons' => [
                     'view' => function($url,$model){
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',['/main/page/show','id'=>$model->id_product]);
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',['/main/page/show','id'=>$model->id]);
                     }
                 ]
             ],

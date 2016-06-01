@@ -77,7 +77,7 @@ class Category extends \yii\db\ActiveRecord
 
     public function getProducts()
     {
-        return $this->hasMany(Product::className(), ['id_product' => 'id_product'])
+        return $this->hasMany(Product::className(), ['id' => 'id_product'])
              ->viaTable('{{%cat_2_product}}', ['id_category' => 'id_category']);
     }
 

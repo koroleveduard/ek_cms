@@ -33,13 +33,13 @@ use app\modules\backend\models\Category;
         <?= $form->field($model, 'top_description')->widget(CKEditor::className(), [
         'options' => ['rows' => 6,
         ],
-        'preset' => 'toolbar_Basic'
+        'preset' => 'full'
     ]) ?>
 
     <?= $form->field($model, 'bottom_description')->widget(CKEditor::className(), [
         'options' => ['rows' => 6,
         ],
-        'preset' => 'toolbar_Basic'
+        'preset' => 'full'
     ]) ?>
       </div>
       <div class="tab-pane" id="seo">

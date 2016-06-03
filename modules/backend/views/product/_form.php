@@ -34,13 +34,12 @@ use kartik\date\DatePicker;
         <?= $form->field($model, 'anounce')->widget(CKEditor::className(), [
         'options' => ['rows' => 6,
         ],
-        'preset' => 'toolbar_Basic'
+        'preset' => 'full'
     ]) ?>
 
         <?= $form->field($model, 'description')->widget(CKEditor::className(), [
-        'options' => ['rows' => 6,
-        ],
-        'preset' => 'toolbar_Basic'
+        'options' => ['rows' => 6,],
+        'preset' => 'full'
     ]) ?>
 
          <?= $form->field($model, 'image')->fileInput(); ?>
@@ -78,8 +77,12 @@ use kartik\date\DatePicker;
         ?>
 
           <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-            
-          <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
+          
+          <?php if($model->isNewRecord):?>  
+            <?= Html::checkBox('Product[status]',true,['label' => 'Активный']);?>
+          <?php else:?>
+            <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
+          <?php endif;?>
       </div>
     </div>
 

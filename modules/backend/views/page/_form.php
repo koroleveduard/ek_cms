@@ -41,13 +41,13 @@ use kartik\date\DatePicker;
         <?= $form->field($model, 'content')->widget(CKEditor::className(), [
         'options' => ['rows' => 6,
         ],
-        'preset' => 'toolbar_Basic'
+        'preset' => 'full'
     ]) ?>
 
     <?= $form->field($model, 'announce')->widget(CKEditor::className(), [
         'options' => ['rows' => 6,
         ],
-        'preset' => 'toolbar_Basic'
+        'preset' => 'full'
     ]) ?>
       </div>
       <div class="tab-pane" id="seo">

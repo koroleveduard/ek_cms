@@ -4,6 +4,7 @@ namespace app\modules\main\controllers;
 use Yii;
 use yii\web\Controller;
 use app\modules\backend\models\Category;
+use yii\data\Pagination;
 
 class CategoryController extends Controller{
 
@@ -17,6 +18,21 @@ class CategoryController extends Controller{
     {
         $id_category = (int)$id;
         $category = Category::findOne($id_category);
+        $query_products = $category->getProducts();
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 6,
+            'forcePageParam' => false,
+            'totalCount' => $query_products->count(),
+        ]);
+
+        $products = $query_products
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+        
+
+
         if(!empty($category->meta_title))
             $this->view->title = $category->meta_title;
         else
@@ -42,6 +58,8 @@ class CategoryController extends Controller{
         
         return $this->render('show',[
             'model'=>$category,
+            'products' => $products,
+            'pagination' => $pagination,
             'breadcrubms' => $breadCrumbs]);
     }
 

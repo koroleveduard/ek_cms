@@ -61,7 +61,6 @@ use kartik\date\DatePicker;
           <?= $form->field($model, 'category_ids')
         ->checkBoxList(
                 ArrayHelper::map(Category::find()->all(), 'id_category', 'name')
-                //,['multiple' => 'true']
             );
         ?>
 
@@ -72,7 +71,7 @@ use kartik\date\DatePicker;
         ?>
         <?= $form->field($model, 'main_category')
         ->dropDownList(
-                [$main_category_list]
+                $main_category_list
             );
         ?>
 

@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view} {delete}',
                 'buttons' => [
                     'view' => function($url,$model){
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',['/main/page/show','id'=>$model->id]);
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',['/main/product/show','id'=>$model->id]);
                     }
                 ]
             ],

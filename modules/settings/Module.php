@@ -14,11 +14,14 @@ class Module extends \yii\base\Module
     	$settings = Settings::find()->asArray()->all();
     	$hostName = $settings[0]['value'];
         $this->enabled = (bool)$settings[1]['value'];
-    	$uri = Yii::$app->request->url;
-    	if($hostName != NULL && Yii::$app->request->hostInfo != $hostName)
-    	{
-    		header("Location: ".$hostName.$uri,true,301);
-    		exit;
-    	}
+        if(isset($_SERVER['REQUEST_URI'])){
+            $uri = Yii::$app->request->url;
+            if($hostName != NULL && Yii::$app->request->hostInfo != $hostName)
+            {
+                header("Location: ".$hostName.$uri,true,301);
+                exit;
+            }
+        }
+    	
     }
 }

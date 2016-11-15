@@ -5,6 +5,7 @@ use Yii;
 use yii\web\Controller;
 use app\modules\backend\models\Category;
 use yii\data\Pagination;
+use \yii\web\NotFoundHttpException;
 
 class CategoryController extends Controller{
 
@@ -18,6 +19,10 @@ class CategoryController extends Controller{
     {
         $id_category = (int)$id;
         $category = Category::findOne($id_category);
+        if($category === NULL){
+            throw new NotFoundHttpException("Category Not Found", 1);
+            
+        }
         $query_products = $category->getProducts();
 
         $pagination = new Pagination([
@@ -33,29 +38,30 @@ class CategoryController extends Controller{
         
 
 
-        if(!empty($category->meta_title))
+        if(!empty($category->meta_title)){
             $this->view->title = $category->meta_title;
-        else
+        } else {
             $this->view->title = $category->name;
+        }
 
-        if(!empty($category->meta_description))
+        if(!empty($category->meta_description)){
             $this->view->registerMetaTag([
                 'name' => 'description',
                 'content' => $category->meta_description
             ],
-                'meta_description');
+            'meta_description');
+        }
 
-        if(!empty($category->meta_keywords))
+        if(!empty($category->meta_keywords)){
             $this->view->registerMetaTag([
                 'name' => 'keywords',
                 'content' => $category->meta_keywords
             ],
-                'meta_keywords');
+            'meta_keywords');
+        }
 
         $breadCrumbs = $this->BuildBreadCrumbs($category);
        
-
-        
         return $this->render('show',[
             'model'=>$category,
             'products' => $products,

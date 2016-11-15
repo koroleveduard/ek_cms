@@ -30,23 +30,31 @@ class PageController extends Controller{
     {
         $id_page = (int)$id;
         $page = Page::findOne($id_page);
-        if(!empty($page->meta_title))
+        if($page === NULL){
+            throw new NotFoundHttpException("Page Not Found", 1);
+        }
+
+        if(!empty($page->meta_title)){
             $this->view->title = $page->meta_title;
-        else
+        } else{
             $this->view->title = $page->title;
-        if(!empty($page->meta_description))
+        }
+
+        if(!empty($page->meta_description)){
             $this->view->registerMetaTag([
                 'name' => 'description',
                 'content' => $page->meta_description
             ],
-                'meta_description');
+            'meta_description');
+        }
 
-        if(!empty($page->meta_keywords))
+        if(!empty($page->meta_keywords)) {
             $this->view->registerMetaTag([
-                'name' => 'keywords',
-                'content' => $page->meta_keywords
+            	'name' => 'keywords',
+            	'content' => $page->meta_keywords
             ],
-                'meta_keywords');
+            'meta_keywords');
+        }
 
         $breadCrumbs = $this->BuildBreadCrumbs($page);
 

@@ -70,6 +70,7 @@ class PageController extends BackendController
     public function actionCreate()
     {
         $model = new Page();
+        $parents = Page::find()->where(['=','status',1])->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if(isset(Yii::$app->request->post()['save'])){
@@ -87,6 +88,7 @@ class PageController extends BackendController
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'parents' => $parents,
             ]);
         }
     }
@@ -100,6 +102,7 @@ class PageController extends BackendController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $parents = Page::find()->where(['=','status',1])->andWhere(['<>','id',$model->id])->all();
         if($model->created){
             $model->created = date('d-m-Y',$model->created);
         } else {
@@ -121,6 +124,7 @@ class PageController extends BackendController
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'parents' => $parents,
             ]);
         }
     }

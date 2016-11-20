@@ -81,15 +81,15 @@ class PageController extends Controller{
             "url" => '/'.$model->slug_compiled
         );
         $parent = $model->parent;
-        while($parent !=0)
+        while($parent !== NULL)
         {
-            $parent_model = Page::findOne($parent);
             $breadcrumbs[] = array(
-                "label" => ($parent_model->breadcrumb) ? $parent_model->breadcrumb : $parent_model->title,
-                "url" => '/'.$parent_model->slug_compiled
+                "label" => ($parent->breadcrumb) ? $parent->breadcrumb : $parent->title,
+                "url" => '/'.$parent->slug_compiled
             );
-            $parent = $parent_model->parent;
+            $parent = $parent->parent;
         }
+
         $breadcrumbs = array_reverse($breadcrumbs);
         unset($breadcrumbs[count($breadcrumbs) - 1]['url']);
 

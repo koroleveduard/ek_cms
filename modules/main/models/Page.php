@@ -30,7 +30,7 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent','status','template_id'], 'integer'],
+            [['parent_id','status','template_id'], 'integer'],
             [['slug', 'title'], 'required','message' => 'Данное поле обязательно для заполнения'],
             [['content','announce'], 'string'],
             [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled','breadcrumb'], 'string', 'max' => 250],
@@ -47,7 +47,7 @@ class Page extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'status' => 'Активен',
-            'parent' => 'Родительская страница',
+            'parent_id' => 'Родительская страница',
             'slug' => 'ЧПУ',
             'title' => 'Заголовок',
             'template_id' => 'Шаблон',
@@ -71,6 +71,11 @@ class Page extends \yii\db\ActiveRecord
     public function getTemplate()
     {
         return $this->hasOne(Templates::className(), ['id' => 'template_id']);
+    }
+
+    public function getParent()
+    {
+        return $this->hasOne(static::className(), ['id' => 'parent_id']);
     }
 
     public static function getByUrlPath($slug){

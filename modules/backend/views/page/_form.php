@@ -70,12 +70,11 @@ use kartik\date\DatePicker;
 
             );
         ?>
-        
-        <?= $form->field($model, 'parent')
+        <?= $form->field($model, 'parent_id')
         ->dropDownList(
             ArrayHelper::merge(
                 [0 => "Выберите родителя"],
-                ArrayHelper::map(Page::find()->where(['<>','id',$model->id])->all(), 'id', 'title')
+                ArrayHelper::map($parents, 'id', 'title')
             )
 
         );

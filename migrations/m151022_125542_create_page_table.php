@@ -14,7 +14,7 @@ class m151022_125542_create_page_table extends Migration
 
         $this->createTable('{{%page}}', [
             'id' => $this->primaryKey(),
-            'parent' => $this->integer(5)->defaultValue(0),
+            'parent_id' => $this->integer(5)->defaultValue(0),
             'slug' => $this->string(250)->notNull(),
             'title' => $this->string(250)->notNull(),
             'content' => $this->text(),
@@ -28,15 +28,4 @@ class m151022_125542_create_page_table extends Migration
     {
         return false;
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

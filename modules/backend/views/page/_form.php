@@ -27,8 +27,6 @@ use kartik\date\DatePicker;
       <div class="tab-pane active" id="content">
 
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-    
-        <?= $form->field($model, 'breadcrumb')->textInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'created')->widget(DatePicker::classname(),[
           'pluginOptions' => [
@@ -55,6 +53,7 @@ use kartik\date\DatePicker;
         <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'breadcrumb')->textInput(['maxlength' => true]) ?>
 
       </div>
       <div class="tab-pane" id="settings">
@@ -62,7 +61,7 @@ use kartik\date\DatePicker;
             
           <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
 
-          <?= $form->field($model, 'template')
+          <?= $form->field($model, 'template_id')
         ->dropDownList(
             ArrayHelper::merge(
                 ["0" => "default"],

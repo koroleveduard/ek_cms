@@ -30,7 +30,7 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent','status','template'], 'integer'],
+            [['parent','status','template_id'], 'integer'],
             [['slug', 'title'], 'required','message' => 'Данное поле обязательно для заполнения'],
             [['content','announce'], 'string'],
             [['slug', 'title','meta_title','meta_description','meta_keywords','slug_compiled','breadcrumb'], 'string', 'max' => 250],
@@ -50,7 +50,7 @@ class Page extends \yii\db\ActiveRecord
             'parent' => 'Родительская страница',
             'slug' => 'ЧПУ',
             'title' => 'Заголовок',
-            'template' => 'Шаблон',
+            'template_id' => 'Шаблон',
             'meta_title' => 'meta title',
             'meta_description' => 'meta description',
             'meta_keywords' => 'meta keywords',
@@ -68,9 +68,9 @@ class Page extends \yii\db\ActiveRecord
         return parent::beforeValidate();
     }
 
-    public function getTemplates()
+    public function getTemplate()
     {
-        return $this->hasOne(Templates::className(), ['id' => 'template']);
+        return $this->hasOne(Templates::className(), ['id' => 'template_id']);
     }
 
     public static function getByUrlPath($slug){

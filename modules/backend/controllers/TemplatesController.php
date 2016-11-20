@@ -17,9 +17,6 @@ class TemplatesController extends BackendController
 {
 	protected function getTree($path = '', $level = 0)
     {
-        // if (is_null($this->view->theme) || !file_exists($this->view->theme->getBaseUrl())) {
-        //     return [];
-        // }
         $result = [];
         $basePath = Yii::getAlias('@webroot/templates');
         $dir = new \DirectoryIterator($basePath . $path);
@@ -98,7 +95,7 @@ class TemplatesController extends BackendController
         $model = new Templates();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -117,7 +114,7 @@ class TemplatesController extends BackendController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

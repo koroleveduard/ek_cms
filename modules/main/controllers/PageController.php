@@ -58,9 +58,9 @@ class PageController extends Controller{
 
         $breadCrumbs = $this->BuildBreadCrumbs($page);
 
-        if($page->templates && file_exists(Yii::getAlias($page->templates->path)))
+        if($page->template && file_exists(Yii::getAlias($page->template->path)))
         {
-            $content = $this->renderFile(Yii::getAlias($page->templates->path),[
+            $content = $this->renderFile(Yii::getAlias($page->template->path),[
             'page'=>$page,
             'breadcrubms' => $breadCrumbs]);
             return $this->renderContent($content);

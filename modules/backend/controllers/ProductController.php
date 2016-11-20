@@ -81,12 +81,17 @@ class ProductController extends BackendController
                 $model->attachImage($path);
             }
             
-            if(isset(Yii::$app->request->post()['save']))
+            if(isset(Yii::$app->request->post()['save'])){
                 return $this->redirect(['update', 'id' => $model->id]);
-            if(isset(Yii::$app->request->post()['save-and-back']))
+            }
+
+            if(isset(Yii::$app->request->post()['save-and-back'])){
                 return $this->redirect(['index']);
-            if(isset(Yii::$app->request->post()['save-and-add']))
+            }
+
+            if(isset(Yii::$app->request->post()['save-and-add'])){
                 return $this->redirect(['create']);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -113,12 +118,17 @@ class ProductController extends BackendController
                 $model->attachImage($path);
             }
 
-            if(isset(Yii::$app->request->post()['save']))
+            if(isset(Yii::$app->request->post()['save'])){
                 return $this->redirect(['update', 'id' => $model->id]);
-            if(isset(Yii::$app->request->post()['save-and-back']))
+            }
+
+            if(isset(Yii::$app->request->post()['save-and-back'])){
                 return $this->redirect(['index']);
-            if(isset(Yii::$app->request->post()['save-and-add']))
+            }
+
+            if(isset(Yii::$app->request->post()['save-and-add'])){
                 return $this->redirect(['create']);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

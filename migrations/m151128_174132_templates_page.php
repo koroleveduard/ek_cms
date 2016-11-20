@@ -7,7 +7,7 @@ class m151128_174132_templates_page extends Migration
 {
     public function up()
     {
-        $this->addColumn('{{%page}}','template','INTEGER(10) DEFAULT \'0\'');
+        $this->addColumn('{{%page}}','template_id','INTEGER(10) DEFAULT \'0\'');
     }
 
     public function down()

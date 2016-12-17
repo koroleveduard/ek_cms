@@ -20,10 +20,11 @@ class ProductController extends Controller{
         $id_product = (int)$id;
         $product = Product::findOne($id_product);
 
-        if(!empty($product->meta_title))
+        if(!empty($product->meta_title)){
             $this->view->title = $product->meta_title;
-        else
+        } else {
             $this->view->title = $product->name;
+        }
 
         if(!empty($product->meta_description))
             $this->view->registerMetaTag([

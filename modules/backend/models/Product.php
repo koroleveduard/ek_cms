@@ -30,7 +30,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'slug'], 'required','message' => 'Данное поле обязательно для заполнения'],
-            [['name', 'slug','h1','meta_title','meta_description','meta_keywords'], 'string', 'max' => 250],
+            [['name', 'slug','h1','meta_title','meta_description','meta_keywords','breadcrumb'], 'string', 'max' => 250],
             [['status'],'integer','max'=>1],
             [['main_category'],'integer'],
             [['description','anounce'], 'string'],
@@ -81,7 +81,8 @@ class Product extends \yii\db\ActiveRecord
             'status'    =>  'статус',
             'category_ids' => 'Категория',
             'main_category' => 'Главная категория',
-            'image' => 'Изображение'
+            'image' => 'Изображение',
+			'breadcrumb' => 'Хлебные крошки'
         ];
     }
 

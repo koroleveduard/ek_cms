@@ -55,6 +55,7 @@ use kartik\date\DatePicker;
         <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'breadcrumb')->textInput(['maxlength' => true]) ?>
 
       </div>
       <div class="tab-pane" id="settings">

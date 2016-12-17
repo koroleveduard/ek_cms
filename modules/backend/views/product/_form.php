@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\backend\models\Category;
+use app\modules\backend\models\Templates;
 use dosamigos\ckeditor\CKEditor;
 use kartik\date\DatePicker;
 
@@ -14,11 +15,13 @@ use kartik\date\DatePicker;
 
 <div class="page-form">
 
-    <?php $form = ActiveForm::begin([
-      'options' => [
+<?php 
+$form = ActiveForm::begin(
+    [
+    'options' => [
         'enctype' => 'multipart/form-data'
-      ],
-    ]); ?>
+	],
+]); ?>
 
     <ul class="nav nav-tabs" id="myTab">
         <li class="active"><a href="#content">Контент</a></li>
@@ -76,7 +79,18 @@ use kartik\date\DatePicker;
             );
         ?>
 
-          <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+		<?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+
+		<?= $form->field($model, 'template_id')
+		->dropDownList(
+			ArrayHelper::merge(
+				["0" => "default"],
+				ArrayHelper::map(Templates::find()->all(), 'id', 'name')
+			)
+
+		);
+		?>
+
           
           <?php if($model->isNewRecord):?>  
             <?= Html::checkBox('Product[status]',true,['label' => 'Активный']);?>

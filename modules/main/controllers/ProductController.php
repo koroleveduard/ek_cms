@@ -41,9 +41,15 @@ class ProductController extends Controller{
                 'meta_keywords');
 
         $breadCrumbs = $this->BuildBreadCrumbs($product);
-       
-
         
+        if($product->template && file_exists(Yii::getAlias($product->template->path)))
+        {
+            $content = $this->renderFile(Yii::getAlias($product->template->path),[
+                'model'=>$product,
+                'breadcrumb' => $breadCrumbs]);
+            return $this->renderContent($content);
+        }
+ 
         return $this->render('show',[
             'model'=>$product,
             'breadcrumb' => $breadCrumbs]);

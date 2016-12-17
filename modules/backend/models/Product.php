@@ -32,7 +32,7 @@ class Product extends \yii\db\ActiveRecord
             [['name', 'slug'], 'required','message' => 'Данное поле обязательно для заполнения'],
             [['name', 'slug','h1','meta_title','meta_description','meta_keywords','breadcrumb'], 'string', 'max' => 250],
             [['status'],'integer','max'=>1],
-            [['main_category'],'integer'],
+            [['main_category','template_id'],'integer'],
             [['description','anounce'], 'string'],
             [['category_ids'], 'each', 'rule' => ['integer']],
         ];
@@ -82,7 +82,8 @@ class Product extends \yii\db\ActiveRecord
             'category_ids' => 'Категория',
             'main_category' => 'Главная категория',
             'image' => 'Изображение',
-			'breadcrumb' => 'Хлебные крошки'
+			'breadcrumb' => 'Хлебные крошки',
+            'template_id' => 'Шаблон'
         ];
     }
 
@@ -97,7 +98,12 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Category::className(), ['id_category' => 'main_category']);
     }
 
-     public static function getByUrlPath($slug){
+    public function getTemplate()
+    {
+        return $this->hasOne(Templates::className(), ['id' => 'template_id']);
+    }
+
+    public static function getByUrlPath($slug){
         $include_cat_slug = Settings::find()->where(['name' => 'category_in_product_slug'])->one()->value;
         if($include_cat_slug) //если в роутинг включены категории
         {

@@ -38,7 +38,7 @@ $config = [
             'errorAction' => 'main/default/error',
         ],
         'request' => [
-            'cookieValidationKey' => '',
+            'cookieValidationKey' => 'jshd3qjaxp',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

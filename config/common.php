@@ -11,6 +11,9 @@ return [
     'bootstrap' => ['log'],
     'components' => [
         'db' => [
+            'dsn' => 'mysql:host=localhost;dbname=test',
+            'username' => 'root',
+            'password' => '',
             'class' => 'yii\db\Connection',
             'charset' => 'utf8',
         ],

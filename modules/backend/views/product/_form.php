@@ -15,13 +15,14 @@ use kartik\date\DatePicker;
 
 <div class="page-form">
 
-<?php 
+<?php
 $form = ActiveForm::begin(
     [
-    'options' => [
-        'enctype' => 'multipart/form-data'
-	],
-]); ?>
+      'options' => [
+          'enctype' => 'multipart/form-data'
+      ],
+    ]
+); ?>
 
     <ul class="nav nav-tabs" id="myTab">
         <li class="active"><a href="#content">Контент</a></li>
@@ -30,7 +31,7 @@ $form = ActiveForm::begin(
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="content">
+        <div class="tab-pane active" id="content">
 
         <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -38,65 +39,66 @@ $form = ActiveForm::begin(
         'options' => ['rows' => 6,
         ],
         'preset' => 'full'
-    ]) ?>
+        ]) ?>
 
         <?= $form->field($model, 'description')->widget(CKEditor::className(), [
-        'options' => ['rows' => 6,],
-        'preset' => 'full'
-    ]) ?>
+          'options' => ['rows' => 6,],
+          'preset' => 'full'
+        ]) ?>
 
-         <?= $form->field($model, 'image')->fileInput(); ?>
+        <?= $form->field($model, 'image')->fileInput(); ?>
 
-         <div class="form-group">
-           <?php $image = $model->getImage(); ?>
-           <img src="<?=$image->getUrl('300x');?>" alt="">
-         </div>
+        <div class="form-group">
+            <?php $image = $model->getImage(); ?>
+            <img src="<?=$image->getUrl('300x');?>" alt="">
+        </div>
     
-      </div>
+        </div>
+
       <div class="tab-pane" id="seo">
         <?= $form->field($model, 'h1')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'breadcrumb')->textInput(['maxlength' => true]) ?>
-
       </div>
+
       <div class="tab-pane" id="settings">
-          <?= $form->field($model, 'category_ids')
+        <?= $form->field($model, 'category_ids')
         ->checkBoxList(
-                ArrayHelper::map(Category::find()->all(), 'id_category', 'name')
-            );
+            ArrayHelper::map(Category::find()->all(), 'id_category', 'name')
+        );
         ?>
 
         <?php
-          $main_category_list = array();
-          if(!$model->isNewRecord)
+        $main_category_list = array();
+        if (!$model->isNewRecord) {
             $main_category_list[$model->main->id_category] = $model->main->name;
+        }
         ?>
         <?= $form->field($model, 'main_category')
         ->dropDownList(
-                $main_category_list
-            );
+            $main_category_list
+        );
         ?>
 
-		<?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
-		<?= $form->field($model, 'template_id')
-		->dropDownList(
-			ArrayHelper::merge(
-				["0" => "default"],
-				ArrayHelper::map(Templates::find()->all(), 'id', 'name')
-			)
-
-		);
-		?>
+        <?= $form->field($model, 'template_id')
+        ->dropDownList(
+            ArrayHelper::merge(
+                ["0" => "default"],
+                ArrayHelper::map(Templates::find()->all(), 'id', 'name')
+            )
+        );
+        ?>
 
           
-          <?php if($model->isNewRecord):?>  
-            <?= Html::checkBox('Product[status]',true,['label' => 'Активный']);?>
-          <?php else:?>
-            <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
-          <?php endif;?>
+        <?php if ($model->isNewRecord) :?>  
+            <?= Html::checkBox('Product[status]', true, ['label' => 'Активный']);?>
+        <?php else :?>
+            <?= $form->field($model, 'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
+        <?php endif ;?>
       </div>
     </div>
 

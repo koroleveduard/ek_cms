@@ -7,9 +7,8 @@ use app\modules\backend\models\Category;
 use yii\data\Pagination;
 use \yii\web\NotFoundHttpException;
 
-class CategoryController extends Controller{
-
-
+class CategoryController extends Controller
+{
     public function getViewPath()
     {
         return Yii::getAlias('@webroot/templates/category');
@@ -19,9 +18,8 @@ class CategoryController extends Controller{
     {
         $id_category = (int)$id;
         $category = Category::findOne($id_category);
-        if($category === NULL){
+        if ($category === null) {
             throw new NotFoundHttpException("Category Not Found", 1);
-            
         }
         $query_products = $category->getProducts();
 
@@ -38,47 +36,54 @@ class CategoryController extends Controller{
         
 
 
-        if(!empty($category->meta_title)){
+        if (!empty($category->meta_title)) {
             $this->view->title = $category->meta_title;
         } else {
             $this->view->title = $category->name;
         }
 
-        if(!empty($category->meta_description)){
-            $this->view->registerMetaTag([
-                'name' => 'description',
-                'content' => $category->meta_description
-            ],
-            'meta_description');
+        if (!empty($category->meta_description)) {
+            $this->view->registerMetaTag(
+                [
+                    'name' => 'description',
+                    'content' => $category->meta_description
+                ],
+                'meta_description'
+            );
         }
 
-        if(!empty($category->meta_keywords)){
-            $this->view->registerMetaTag([
-                'name' => 'keywords',
-                'content' => $category->meta_keywords
-            ],
-            'meta_keywords');
+        if (!empty($category->meta_keywords)) {
+            $this->view->registerMetaTag(
+                [
+                    'name' => 'keywords',
+                    'content' => $category->meta_keywords
+                ],
+                'meta_keywords'
+            );
         }
 
-        $breadCrumbs = $this->BuildBreadCrumbs($category);
+        $breadCrumbs = $this->buildBreadCrumbs($category);
        
-        return $this->render('show',[
-            'model'=>$category,
-            'products' => $products,
-            'pagination' => $pagination,
-            'breadcrubms' => $breadCrumbs]);
+        return $this->render(
+            'show',
+            [
+                'model'=>$category,
+                'products' => $products,
+                'pagination' => $pagination,
+                'breadcrubms' => $breadCrumbs
+            ]
+        );
     }
 
-    public function BuildBreadCrumbs($model)
+    public function buildBreadCrumbs($model)
     {
-    	$breadcrumbs[] = array(
+        $breadcrumbs[] = array(
             "label" => ($model->breadcrumb) ? $model->breadcrumb : $model->name,
             "url" => '/'.$model->slug_compiled
         );
         
         $parent = $model->parent;
-        while($parent !=0)
-        {
+        while ($parent !=0) {
             $parent_model = Category::findOne($parent);
             $breadcrumbs[] = array(
                 "label" => ($parent_model->breadcrumb) ? $parent_model->breadcrumb : $parent_model->name,

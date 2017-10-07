@@ -13,7 +13,6 @@ use app\assets\AppAsset;
 use app\assets\BackendAsset;
 use app\assets\ProtectedAsset;
 
-
 AppAsset::register($this);
 BackendAsset::register($this);
 ProtectedAsset::register($this);
@@ -41,7 +40,7 @@ ProtectedAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Html::a('Очистить кеш',Url::to(['/backend/backend/flush-cache']),['class'=>'clear-cache btn btn-warning']);
+    echo Html::a('Очистить кеш', Url::to(['/backend/backend/flush-cache']), ['class'=>'clear-cache btn btn-warning']);
     echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => array_filter([

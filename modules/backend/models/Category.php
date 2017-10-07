@@ -60,11 +60,9 @@ class Category extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-
             $this->slug_compiled = $this->slug;
             $parent = $this->parent;
-            while($parent !=0)
-            {
+            while ($parent !=0) {
                 $parent_model = self::findOne($parent);
                 $this->slug_compiled = $parent_model->slug.'/'.$this->slug_compiled;
                 $parent = $parent_model->parent;
@@ -81,15 +79,16 @@ class Category extends \yii\db\ActiveRecord
              ->viaTable('{{%cat_2_product}}', ['id_category' => 'id_category']);
     }
 
-    public static function findById($id){
+    public static function findById($id)
+    {
         $id_category = (int)$id;
         $category = self::find()->where(['status'=>1,'id_category'=>$id_category])->one();
         return $category;
     }
 
-    public static function getByUrlPath($slug){
+    public static function getByUrlPath($slug)
+    {
         $category = self::find()->where(['slug_compiled' => $slug,'status'=>1])->one();
         return $category;
     }
-    
 }

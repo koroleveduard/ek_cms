@@ -63,8 +63,9 @@ class Page extends \yii\db\ActiveRecord
 
     public function beforeValidate()
     {
-        if($this->created)
-            $this->created = \DateTime::createFromFormat('d-m-Y',$this->created)->format('U');
+        if ($this->created) {
+            $this->created = \DateTime::createFromFormat('d-m-Y', $this->created)->format('U');
+        }
         return parent::beforeValidate();
     }
 
@@ -78,12 +79,14 @@ class Page extends \yii\db\ActiveRecord
         return $this->hasOne(static::className(), ['id' => 'parent_id']);
     }
 
-    public static function getByUrlPath($slug){
+    public static function getByUrlPath($slug)
+    {
         $page = self::find()->where(['slug_compiled' => $slug,'status'=>1])->one();
         return $page;
     }
 
-    public static function findById($id){
+    public static function findById($id)
+    {
         $id_page = (int)$id;
         $page = self::find()->where(['status'=>1,'id'=>$id_page])->one();
         return $page;

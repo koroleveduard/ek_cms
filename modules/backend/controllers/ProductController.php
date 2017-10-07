@@ -15,6 +15,8 @@ use yii\web\UploadedFile;
  */
 class ProductController extends BackendController
 {
+    const UPLOAD_DIR = '@webroot/upload/files/';
+
     public function behaviors()
     {
         $behaviors_array = [
@@ -30,7 +32,6 @@ class ProductController extends BackendController
         return yii\helpers\ArrayHelper::merge(
             $behaviors_array,
             $parent_behaviors
-
         );
     }
 
@@ -72,24 +73,27 @@ class ProductController extends BackendController
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            $image = UploadedFile::getInstance($model,'image');
-            if($image){
+            $image = UploadedFile::getInstance($model, 'image');
+            if ($image) {
                 $model->removeImages();
-                $path = Yii::getAlias('@webroot/upload/files/').$image->baseName.'.'.$image->extension;
+                $uploadDir = Yii::getAlias(self::UPLOAD_DIR);
+                $path = $uploadDir.$image->baseName.'.'.$image->extension;
+                if (is_dir($uploadDir) === false) {
+                    mkdir($uploadDir, 0775, true);
+                }
                 $image->saveAs($path);
                 $model->attachImage($path);
             }
             
-            if(isset(Yii::$app->request->post()['save'])){
+            if (isset(Yii::$app->request->post()['save'])) {
                 return $this->redirect(['update', 'id' => $model->id]);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-back'])){
+            if (isset(Yii::$app->request->post()['save-and-back'])) {
                 return $this->redirect(['index']);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-add'])){
+            if (isset(Yii::$app->request->post()['save-and-add'])) {
                 return $this->redirect(['create']);
             }
         } else {
@@ -109,24 +113,27 @@ class ProductController extends BackendController
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            $image = UploadedFile::getInstance($model,'image');
-            if($image){
+            $image = UploadedFile::getInstance($model, 'image');
+            if ($image) {
                 $model->removeImages();
-                $path = Yii::getAlias('@webroot/upload/files/').$image->baseName.'.'.$image->extension;
+                $uploadDir = Yii::getAlias(self::UPLOAD_DIR);
+                $path = $uploadDir.$image->baseName.'.'.$image->extension;
+                if (is_dir($uploadDir) === false) {
+                    mkdir($uploadDir, 0775, true);
+                }
                 $image->saveAs($path);
                 $model->attachImage($path);
             }
 
-            if(isset(Yii::$app->request->post()['save'])){
+            if (isset(Yii::$app->request->post()['save'])) {
                 return $this->redirect(['update', 'id' => $model->id]);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-back'])){
+            if (isset(Yii::$app->request->post()['save-and-back'])) {
                 return $this->redirect(['index']);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-add'])){
+            if (isset(Yii::$app->request->post()['save-and-add'])) {
                 return $this->redirect(['create']);
             }
         } else {

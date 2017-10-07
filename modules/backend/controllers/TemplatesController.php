@@ -15,7 +15,7 @@ use yii\web\Response;
  */
 class TemplatesController extends BackendController
 {
-	protected function getTree($path = '', $level = 0)
+    protected function getTree($path = '', $level = 0)
     {
         $result = [];
         $basePath = Yii::getAlias('@webroot/templates');
@@ -64,7 +64,6 @@ class TemplatesController extends BackendController
         return yii\helpers\ArrayHelper::merge(
             $behaviors_array,
             $parent_behaviors
-
         );
     }
 

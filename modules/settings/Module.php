@@ -11,17 +11,15 @@ class Module extends \yii\base\Module
 
     public function init()
     {
-    	$settings = Settings::find()->asArray()->all();
-    	$hostName = $settings[0]['value'];
+        $settings = Settings::find()->asArray()->all();
+        $hostName = $settings[0]['value'];
         $this->enabled = (bool)$settings[1]['value'];
-        if(isset($_SERVER['REQUEST_URI'])){
+        if (isset($_SERVER['REQUEST_URI'])) {
             $uri = Yii::$app->request->url;
-            if($hostName != NULL && Yii::$app->request->hostInfo != $hostName)
-            {
-                header("Location: ".$hostName.$uri,true,301);
+            if ($hostName != null && Yii::$app->request->hostInfo != $hostName) {
+                header("Location: ".$hostName.$uri, true, 301);
                 exit;
             }
         }
-    	
     }
 }

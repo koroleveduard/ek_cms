@@ -30,7 +30,6 @@ class PageController extends BackendController
         return yii\helpers\ArrayHelper::merge(
             $behaviors_array,
             $parent_behaviors
-
         );
     }
 
@@ -73,18 +72,17 @@ class PageController extends BackendController
         $parents = Page::find()->where(['=','status',1])->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if(isset(Yii::$app->request->post()['save'])){
+            if (isset(Yii::$app->request->post()['save'])) {
                 return $this->redirect(['update', 'id' => $model->id]);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-back'])){
+            if (isset(Yii::$app->request->post()['save-and-back'])) {
                 return $this->redirect(['index']);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-add'])){
+            if (isset(Yii::$app->request->post()['save-and-add'])) {
                 return $this->redirect(['create']);
             }
-
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -103,22 +101,22 @@ class PageController extends BackendController
     {
         $model = $this->findModel($id);
         $parents = Page::find()->where(['=','status',1])->andWhere(['<>','id',$model->id])->all();
-        if($model->created){
-            $model->created = date('d-m-Y',$model->created);
+        if ($model->created) {
+            $model->created = date('d-m-Y', $model->created);
         } else {
             $model->created = date('d-m-Y');
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if(isset(Yii::$app->request->post()['save'])){
+            if (isset(Yii::$app->request->post()['save'])) {
 
                 return $this->redirect(['update', 'id' => $model->id]);
             }
-            if(isset(Yii::$app->request->post()['save-and-back'])){
+            if (isset(Yii::$app->request->post()['save-and-back'])) {
                 return $this->redirect(['index']);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-add'])){
+            if (isset(Yii::$app->request->post()['save-and-add'])) {
                 return $this->redirect(['create']);
             }
         } else {

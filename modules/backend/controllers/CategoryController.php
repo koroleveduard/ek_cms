@@ -30,7 +30,6 @@ class CategoryController extends BackendController
         return yii\helpers\ArrayHelper::merge(
             $behaviors_array,
             $parent_behaviors
-
         );
     }
 
@@ -74,15 +73,15 @@ class CategoryController extends BackendController
         $parents = Category::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if(isset(Yii::$app->request->post()['save'])){
+            if (isset(Yii::$app->request->post()['save'])) {
                 return $this->redirect(['update', 'id' => $model->id_category]);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-back'])){
+            if (isset(Yii::$app->request->post()['save-and-back'])) {
                 return $this->redirect(['index']);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-add'])){
+            if (isset(Yii::$app->request->post()['save-and-add'])) {
                 return $this->redirect(['create']);
             }
         } else {
@@ -105,15 +104,15 @@ class CategoryController extends BackendController
         $parents = Category::find()->where(['<>','id_category',$model->id_category])->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if(isset(Yii::$app->request->post()['save'])){
+            if (isset(Yii::$app->request->post()['save'])) {
                 return $this->redirect(['update', 'id' => $model->id_category]);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-back'])){
+            if (isset(Yii::$app->request->post()['save-and-back'])) {
                 return $this->redirect(['index']);
             }
 
-            if(isset(Yii::$app->request->post()['save-and-add'])){
+            if (isset(Yii::$app->request->post()['save-and-add'])) {
                 return $this->redirect(['create']);
             }
         } else {

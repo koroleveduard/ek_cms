@@ -9,7 +9,6 @@ use yii\filters\VerbFilter;
 use yii\web\Response;
 use app\modules\backend\models\Settings;
 
-
 class SettingsController extends BackendController
 {
 
@@ -28,7 +27,6 @@ class SettingsController extends BackendController
         return yii\helpers\ArrayHelper::merge(
             $behaviors_array,
             $parent_behaviors
-
         );
     }
 
@@ -37,13 +35,10 @@ class SettingsController extends BackendController
     {
         $settings = Settings::find()->all();
         
-        if(Yii::$app->request->post())
-        {
+        if (Yii::$app->request->post()) {
             //сбрасываем все чекбоксы, которые не пришли с формы в 0
-            foreach($settings as $option)
-            {
-                if(!array_key_exists($option->name, Yii::$app->request->post()['Settings']))
-                {
+            foreach ($settings as $option) {
+                if (!array_key_exists($option->name, Yii::$app->request->post()['Settings'])) {
                     $curSettings = Settings::findOne(['name'=>$option->name]);
                     $curSettings->value = "0";
                     $curSettings->save();
@@ -52,8 +47,7 @@ class SettingsController extends BackendController
             }
 
             //устанавливаем остальные настройки
-            foreach(Yii::$app->request->post()['Settings'] as $settingName => $settingValue)
-            {
+            foreach (Yii::$app->request->post()['Settings'] as $settingName => $settingValue) {
                 $curSettings = Settings::findOne(['name'=>$settingName]);
                 $curSettings->value = $settingValue;
                 $curSettings->save();
@@ -61,6 +55,7 @@ class SettingsController extends BackendController
             }
             return $this->redirect(['index']);
         }
-        return $this->render('index',['settings' => $settings]);
+
+        return $this->render('index', ['settings' => $settings]);
     }
 }

@@ -23,7 +23,7 @@ use dosamigos\ckeditor\CKEditor;
             <?= $form->field($model, 'path')->textInput(['maxlength' => true,'id'=>'view-view'])->label(false) ?>
         </div>
         <div class="col-md-4">
-            <?=Html::submitInput('Файл',['id'=>'show-tree']);?>
+            <?=Html::submitInput('Файл', ['id'=>'show-tree']);?>
         </div>
     </div>
     

@@ -33,7 +33,7 @@ AppAsset::register($this);
         'brandLabel' => 'My Company',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-inverse',
         ],
     ]);
     echo Nav::widget([
@@ -60,7 +60,7 @@ AppAsset::register($this);
         <div class="b-sidebar">
             <ul class="b-list-categories">
             <?php $categories = Category::find()->where(['status'=>1])->all();?>
-            <?php foreach($categories as $category):?>
+            <?php foreach ($categories as $category) :?>
                 <li class="b-list-categories__tem">
                     <a href="<?=Url::toRoute(['/main/category/show','id'=>$category->id_category]);?>" class="b-list-categories__link"><?=$category->name;?></a>
                 </li>

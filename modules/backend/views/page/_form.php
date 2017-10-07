@@ -28,7 +28,7 @@ use kartik\date\DatePicker;
 
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'created')->widget(DatePicker::classname(),[
+        <?= $form->field($model, 'created')->widget(DatePicker::classname(), [
           'pluginOptions' => [
             'language' => 'ru',
             'format' => 'dd-mm-yyyy',
@@ -59,15 +59,14 @@ use kartik\date\DatePicker;
       <div class="tab-pane" id="settings">
             <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
             
-          <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
+            <?= $form->field($model, 'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
 
-          <?= $form->field($model, 'template_id')
-        ->dropDownList(
-            ArrayHelper::merge(
-                ["0" => "default"],
-                ArrayHelper::map(Templates::find()->all(), 'id', 'name')
-            )
-
+            <?= $form->field($model, 'template_id')
+            ->dropDownList(
+                ArrayHelper::merge(
+                    ["0" => "default"],
+                    ArrayHelper::map(Templates::find()->all(), 'id', 'name')
+                )
             );
         ?>
         <?= $form->field($model, 'parent_id')
@@ -76,7 +75,6 @@ use kartik\date\DatePicker;
                 [0 => "Выберите родителя"],
                 ArrayHelper::map($parents, 'id', 'title')
             )
-
         );
     ?>
       </div>
@@ -84,16 +82,16 @@ use kartik\date\DatePicker;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Сохранить', [
-        	'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
-        	'name' => 'save']) ?>
+            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+            'name' => 'save']) ?>
 
         <?= Html::submitButton($model->isNewRecord ? 'Сохранить и вернуться' : 'Сохранить и вернуться', ['
-        	class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
-        	'name' => 'save-and-back']) ?>
+            class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+            'name' => 'save-and-back']) ?>
 
         <?= Html::submitButton($model->isNewRecord ? 'Сохранить и создать новую' : 'Сохранить и создать новую', ['
-        	class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
-        	'name' => 'save-and-add']) ?>
+            class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+            'name' => 'save-and-add']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

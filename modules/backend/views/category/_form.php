@@ -52,15 +52,15 @@ use app\modules\backend\models\Category;
       <div class="tab-pane" id="settings">
             <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
             
-            <?= $form->field($model,'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
+            <?= $form->field($model, 'status')->checkBox(['label' => 'Активный','uncheck' => 0, 'checked'=>1]); ?>
 
-              <?= $form->field($model, 'parent')
-          ->dropDownList(
-             ArrayHelper::merge(
-                  [0 => "Выберите родителя"],
-                  ArrayHelper::map($parents, 'id_category', 'name')
-                  )
-          );?>
+            <?= $form->field($model, 'parent')
+            ->dropDownList(
+                ArrayHelper::merge(
+                    [0 => "Выберите родителя"],
+                    ArrayHelper::map($parents, 'id_category', 'name')
+                )
+            );?>
       </div>
     </div>
 

@@ -5,8 +5,8 @@ namespace app\modules\backend\controllers;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 
-
-class BackendController extends  Controller{
+class BackendController extends Controller
+{
 
     public function behaviors()
     {
@@ -31,5 +31,4 @@ class BackendController extends  Controller{
             ],
         ];
     }
-
 }

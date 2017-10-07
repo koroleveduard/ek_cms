@@ -5,8 +5,8 @@ use Yii;
 use yii\web\Controller;
 use app\modules\main\models\Page;
 
-class PageController extends Controller{
-
+class PageController extends Controller
+{
     public function behaviors()
     {
         return [
@@ -30,49 +30,55 @@ class PageController extends Controller{
     {
         $id_page = (int)$id;
         $page = Page::findOne($id_page);
-        if($page === NULL){
+        if ($page === null) {
             throw new NotFoundHttpException("Page Not Found", 1);
         }
 
-        if(!empty($page->meta_title)){
+        if (!empty($page->meta_title)) {
             $this->view->title = $page->meta_title;
-        } else{
+        } else {
             $this->view->title = $page->title;
         }
 
-        if(!empty($page->meta_description)){
-            $this->view->registerMetaTag([
-                'name' => 'description',
-                'content' => $page->meta_description
-            ],
-            'meta_description');
+        if (!empty($page->meta_description)) {
+            $this->view->registerMetaTag(
+                [
+                    'name' => 'description',
+                    'content' => $page->meta_description
+                ],
+                'meta_description'
+            );
         }
 
-        if(!empty($page->meta_keywords)) {
-            $this->view->registerMetaTag([
-            	'name' => 'keywords',
-            	'content' => $page->meta_keywords
-            ],
-            'meta_keywords');
+        if (!empty($page->meta_keywords)) {
+            $this->view->registerMetaTag(
+                [
+                   'name' => 'keywords',
+                   'content' => $page->meta_keywords
+                ],
+                'meta_keywords'
+            );
         }
 
-        $breadCrumbs = $this->BuildBreadCrumbs($page);
+        $breadCrumbs = $this->buildBreadCrumbs($page);
 
-        if($page->template && file_exists(Yii::getAlias($page->template->path)))
-        {
-            $content = $this->renderFile(Yii::getAlias($page->template->path),[
-            'page'=>$page,
-            'breadcrubms' => $breadCrumbs]);
+        if ($page->template && file_exists(Yii::getAlias($page->template->path))) {
+            $content = $this->renderFile(
+                Yii::getAlias($page->template->path),
+                [
+                    'page'=>$page,
+                    'breadcrubms' => $breadCrumbs]
+            );
             return $this->renderContent($content);
         }
 
         
-        return $this->render('show',[
+        return $this->render('show', [
             'page'=>$page,
             'breadcrubms' => $breadCrumbs]);
     }
 
-    public function BuildBreadCrumbs($model)
+    public function buildBreadCrumbs($model)
     {
 
 
@@ -81,8 +87,7 @@ class PageController extends Controller{
             "url" => '/'.$model->slug_compiled
         );
         $parent = $model->parent;
-        while($parent !== NULL)
-        {
+        while ($parent !== null) {
             $breadcrumbs[] = array(
                 "label" => ($parent->breadcrumb) ? $parent->breadcrumb : $parent->title,
                 "url" => '/'.$parent->slug_compiled

@@ -10,7 +10,7 @@ class Module extends \yii\base\Module
 
     public function init()
     {
-    	$this->layout = 'backend_main';
+        $this->layout = 'backend_main';
         parent::init();
     }
 }

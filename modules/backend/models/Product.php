@@ -82,7 +82,7 @@ class Product extends \yii\db\ActiveRecord
             'category_ids' => 'Категория',
             'main_category' => 'Главная категория',
             'image' => 'Изображение',
-			'breadcrumb' => 'Хлебные крошки',
+            'breadcrumb' => 'Хлебные крошки',
             'template_id' => 'Шаблон'
         ];
     }
@@ -103,16 +103,17 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Templates::className(), ['id' => 'template_id']);
     }
 
-    public static function getByUrlPath($slug){
+    public static function getByUrlPath($slug)
+    {
         $include_cat_slug = Settings::find()->where(['name' => 'category_in_product_slug'])->one()->value;
-        if($include_cat_slug) //если в роутинг включены категории
-        {
+        //если в роутинг включены категории
+        if ($include_cat_slug) {
             $slug_part = explode('/', $slug);
             $product_slug = $slug_part[count($slug_part)-1];
             unset($slug_part[count($slug_part)-1]);
             $category_slug = implode('/', $slug_part);
             $product = self::find()->where(['slug' => $product_slug,'status'=>1])->one();
-            if($product != NULL && $product->main->slug_compiled == $category_slug){
+            if ($product != null && $product->main->slug_compiled == $category_slug) {
                 return $product;
             } else {
                 return null;
@@ -122,10 +123,10 @@ class Product extends \yii\db\ActiveRecord
         return $product;
     }
 
-    public static function findById($id){
+    public static function findById($id)
+    {
         $id_product = (int)$id;
         $product = self::find()->where(['status'=>1,'id'=>$id_product])->one();
         return $product;
     }
-
 }

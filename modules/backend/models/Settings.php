@@ -46,5 +46,4 @@ class Settings extends \yii\db\ActiveRecord
             'value' => 'Значение',
         ];
     }
-
 }

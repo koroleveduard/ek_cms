@@ -7,10 +7,14 @@ use yii\widgets\LinkPager;
 $this->title = 'EK-CMS';
 ?>
 <div class="main-default-index">
-    <?php if(!empty($pages)):?>
-        <?php foreach($pages as $page):?>
+    <?php if (!empty($pages)) :?>
+        <?php foreach ($pages as $page) :?>
             <div class="post">
-            <h3 class="title"><a href="<?=Url::to(['/main/page/show','id'=>$page->id]);?>"><?=$page->title;?></a></h3>
+            <h3 class="title">
+                <a href="<?=Url::to(['/main/page/show','id'=>$page->id]);?>">
+                    <?=$page->title;?>
+                </a>
+            </h3>
             <?=$page->announce ? $page->announce :$page->content;?>
             </div>
         <?php endforeach;?>

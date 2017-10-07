@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'label' => 'Название',
                 'format' => 'html',
-                'value' => function($model){
+                'value' => function ($model) {
                     return Html::a(
                         $model->name,
                         ['/backend/category/update','id'=>$model->id_category]
@@ -39,8 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {delete}',
                 'buttons' => [
-                    'view' => function($url,$model){
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',['/main/category/show','id'=>$model->id_category]);
+                    'view' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['/main/category/show','id'=>$model->id_category]);
                     }
                 ]
             ],

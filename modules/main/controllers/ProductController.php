@@ -6,9 +6,8 @@ use yii\web\Controller;
 use app\modules\backend\models\Product;
 use app\modules\backend\models\Category;
 
-class ProductController extends Controller{
-
-
+class ProductController extends Controller
+{
     public function getViewPath()
     {
         return Yii::getAlias('@webroot/templates/product');
@@ -20,42 +19,47 @@ class ProductController extends Controller{
         $id_product = (int)$id;
         $product = Product::findOne($id_product);
 
-        if(!empty($product->meta_title)){
+        if (!empty($product->meta_title)) {
             $this->view->title = $product->meta_title;
         } else {
             $this->view->title = $product->name;
         }
 
-        if(!empty($product->meta_description))
-            $this->view->registerMetaTag([
-                'name' => 'description',
-                'content' => $product->meta_description
-            ],
-                'meta_description');
+        if (!empty($product->meta_description)) {
+            $this->view->registerMetaTag(
+                [
+                    'name' => 'description',
+                    'content' => $product->meta_description
+                ],
+                'meta_description'
+            );
+        }
 
-        if(!empty($product->meta_keywords))
-            $this->view->registerMetaTag([
-                'name' => 'keywords',
-                'content' => $product->meta_keywords
-            ],
-                'meta_keywords');
+        if (!empty($product->meta_keywords)) {
+            $this->view->registerMetaTag(
+                [
+                    'name' => 'keywords',
+                    'content' => $product->meta_keywords
+                ],
+                'meta_keywords'
+            );
+        }
 
-        $breadCrumbs = $this->BuildBreadCrumbs($product);
+        $breadCrumbs = $this->buildBreadCrumbs($product);
         
-        if($product->template && file_exists(Yii::getAlias($product->template->path)))
-        {
-            $content = $this->renderFile(Yii::getAlias($product->template->path),[
+        if ($product->template && file_exists(Yii::getAlias($product->template->path))) {
+            $content = $this->renderFile(Yii::getAlias($product->template->path), [
                 'model'=>$product,
                 'breadcrumb' => $breadCrumbs]);
             return $this->renderContent($content);
         }
  
-        return $this->render('show',[
+        return $this->render('show', [
             'model'=>$product,
             'breadcrumb' => $breadCrumbs]);
     }
 
-    function BuildBreadCrumbs($model)
+    protected function buildBreadCrumbs($model)
     {
         $breadcrumbs[] = array(
             "label" => ($model->breadcrumb) ? $model->breadcrumb : $model->name,
@@ -70,8 +74,7 @@ class ProductController extends Controller{
         );
 
         $parent = $category->parent;
-        while($parent !=0)
-        {
+        while ($parent !=0) {
             $parent_model = Category::findOne($parent);
             $breadcrumbs[] = array(
                 "label" => ($parent_model->breadcrumb) ? $parent_model->breadcrumb : $parent_model->name,

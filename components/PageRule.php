@@ -14,19 +14,20 @@ class PageRule implements UrlRuleInterface
     public function createUrl($manager, $route, $params)
     {
 
-     if($route == 'main/page/show') {
-         if (isset($params['id'])) {
-             $model = Page::findById($params['id']);
-             unset($params['id']);
-         }
-         if (null !== $model) {
-             $url = $model->slug_compiled;
-             $_query = http_build_query($params);
-             $url = (!empty($_query)) ? $url . '?' . $_query : $url;
-             return $url;
-         }
-     }
-     return false;
+        if ($route == 'main/page/show') {
+            if (isset($params['id'])) {
+                $model = Page::findById($params['id']);
+                unset($params['id']);
+            }
+
+            if (null !== $model) {
+                $url = $model->slug_compiled;
+                $_query = http_build_query($params);
+                $url = (!empty($_query)) ? $url . '?' . $_query : $url;
+                return $url;
+            }
+        }
+        return false;
     }
 
     /**

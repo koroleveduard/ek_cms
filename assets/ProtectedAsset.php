@@ -18,12 +18,13 @@ class ProtectedAsset extends AssetBundle
     public $sourcePath = '@app/assets/protected';
 
     public $css = [
-    	'css/backend.css',
+        'css/backend.css',
     ];
 
     public $js = [
-    	'js/backend.js',
+        'js/backend.js',
     ];
+    
     public $depends = [
         'yii\web\YiiAsset',
     ];

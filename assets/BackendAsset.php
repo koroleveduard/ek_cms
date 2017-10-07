@@ -16,6 +16,7 @@ use yii\web\AssetBundle;
 class BackendAsset extends AssetBundle
 {
     public $sourcePath = '@vendor/vakata/jstree';
+    
     public $js = [
         'src/jstree.js',
     ];
